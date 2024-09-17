@@ -415,8 +415,10 @@ module.exports = function style(s, gd, legend) {
             var p = d3.select(this);
 
             if((trace.boxpoints === 'all' || trace.points === 'all') &&
-                Color.opacity(trace.fillcolor) === 0 && Color.opacity((trace.line || {}).color) === 0
+                Color.opacity(trace.fillcolor) === 0 && 
+                (Color.opacity((trace.line || {}).color) === 0 || trace.line.width === 0)
             ) {
+                console.log("here now");
                 var tMod = Lib.minExtend(trace, {
                     marker: {
                         size: constantItemSizing ? CST_MARKER_SIZE : Lib.constrain(trace.marker.size, 2, 16),
